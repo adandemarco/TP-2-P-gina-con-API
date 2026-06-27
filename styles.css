@@ -1,0 +1,256 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #e5e5e5;
+    font-family: Arial, sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+li {
+    list-style: none;
+}
+
+/* NAV */
+
+#navegacion {
+    height: 70px;
+    background-color: #344253;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 5px #888;
+}
+
+#logo {
+    height: 70px;
+    width: 280px;
+    background-color: #3f86b9;
+    display: flex;
+    align-items: center;
+    padding-left: 25px;
+}
+
+#logo h1 {
+    color: white;
+    font-size: 36px;
+    margin: 0;
+    font-family: Georgia, serif;
+    text-shadow: 2px 2px 2px #333;
+}
+
+#menu {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+    margin-right: 30px;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+#btn_buscar {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+/* FILTROS */
+
+#filtros {
+    background-color: white;
+    width: 94%;
+    margin: 45px auto 0 auto;
+}
+
+#tabs {
+    display: flex;
+    height: 95px;
+    border-bottom: 1px solid #ddd;
+}
+
+.tab {
+    width: 18%;
+    background-color: white;
+    border: none;
+    border-right: 1px solid #ddd;
+    color: #2d78e8;
+    font-size: 23px;
+    cursor: pointer;
+}
+
+.tab.activo {
+    color: #666;
+    border-bottom: 7px solid #3f86b9;
+}
+
+#buscador {
+    display: flex;
+    justify-content: center;
+    padding: 25px 0 5px 0;
+}
+
+#input_busqueda {
+    width: 40%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+#btn_input_buscar {
+    padding: 12px 20px;
+    background-color: #3f86b9;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#abecedario {
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#abecedario button {
+    background: none;
+    border: none;
+    color: #2d78e8;
+    font-size: 26px;
+    cursor: pointer;
+}
+
+/* CONTENIDO */
+
+#contenedor_principal {
+    width: 95%;
+    margin: 45px auto;
+}
+
+#titulo_novedades {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 35px;
+}
+
+#titulo_novedades h2 {
+    background-color: white;
+    color: #222;
+    font-size: 30px;
+    font-weight: normal;
+    padding: 8px 14px;
+    margin: 0;
+    box-shadow: 0 2px 4px #bbb;
+}
+
+#contenedor_libros {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.libro {
+    background-color: white;
+    display: flex;
+    min-height: 190px;
+    box-shadow: 0 2px 4px #ccc;
+    overflow: hidden;
+}
+
+.libro img {
+    width: 140px;
+    height: 190px;
+    object-fit: cover;
+}
+
+.info_libro {
+    padding: 12px;
+    overflow: hidden;
+}
+
+.info_libro h3 {
+    margin: 0;
+    color: #333;
+    font-size: 22px;
+    font-weight: normal;
+}
+
+.autor {
+    margin: 5px 0 15px 0;
+    color: #999;
+    font-size: 15px;
+}
+
+.descripcion {
+    color: #888;
+    font-size: 15px;
+    line-height: 22px;
+    max-height: 65px;
+    overflow: hidden;
+}
+
+.descargar {
+    display: inline-block;
+    margin-top: 10px;
+    background-color: #3f86b9;
+    color: white;
+    padding: 7px 10px;
+    font-size: 13px;
+}
+
+#contenedor_boton {
+    display: flex;
+    justify-content: center;
+    margin-top: 35px;
+}
+
+#btn_cargar_mas {
+    background-color: #3f86b9;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* RESPONSIVE */
+
+@media screen and (max-width: 1200px) {
+    #contenedor_libros {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .tab {
+        width: 33.3%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    #navegacion {
+        height: auto;
+        flex-direction: column;
+    }
+
+    #logo {
+        width: 100%;
+        justify-content: center;
+        padding-left: 0;
+    }
+
+    #menu {
+        margin: 15px 0;
+        font-size: 18px;
+    }
+
+    #contenedor_libros {
+        grid-template-columns: 1fr;
+    }
+
+    #input_busqueda {
+        width: 65%;
+    }
+}
