@@ -219,17 +219,35 @@ li {
 
 /* RESPONSIVE */
 
-@media screen and (max-width: 1200px) {
+/* Tablet horizontal */
+@media screen and (max-width: 1080px) {
     #contenedor_libros {
         grid-template-columns: repeat(2, 1fr);
     }
 
     .tab {
-        width: 33.3%;
+        width: 33.33%;
+    }
+
+    #input_busqueda {
+        width: 55%;
+    }
+
+    #abecedario {
+        height: auto;
+        padding: 20px;
+        flex-wrap: wrap;
+        gap: 4px;
+    }
+
+    #menu {
+        font-size: 21px;
+        gap: 25px;
     }
 }
 
-@media screen and (max-width: 700px) {
+/* Tablet vertical */
+@media screen and (max-width: 768px) {
     #navegacion {
         height: auto;
         flex-direction: column;
@@ -243,14 +261,198 @@ li {
 
     #menu {
         margin: 15px 0;
+        padding: 0;
         font-size: 18px;
+    }
+
+    #filtros {
+        width: 96%;
+        margin-top: 25px;
+    }
+
+    #tabs {
+        height: 75px;
+    }
+
+    .tab {
+        font-size: 20px;
+    }
+
+    #input_busqueda {
+        width: 65%;
+    }
+
+    #contenedor_principal {
+        width: 96%;
+        margin-top: 30px;
     }
 
     #contenedor_libros {
         grid-template-columns: 1fr;
     }
 
+    .libro {
+        min-height: 180px;
+    }
+
+    .libro img {
+        width: 130px;
+        height: 180px;
+    }
+}
+
+/* Mobile 1 */
+@media screen and (max-width: 480px) {
+    #logo h1 {
+        font-size: 2rem;
+    }
+
+    #menu {
+        gap: 18px;
+        font-size: 1rem;
+    }
+
+    #btn_buscar {
+        font-size: 1.4rem;
+    }
+
+    #filtros {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    #tabs {
+        height: 60px;
+    }
+
+    .tab {
+        font-size: 1rem;
+    }
+
+    #buscador {
+        padding: 20px 12px 5px;
+    }
+
     #input_busqueda {
-        width: 65%;
+        width: 100%;
+        font-size: 1rem;
+    }
+
+    #btn_input_buscar {
+        padding: 10px 14px;
+        font-size: 0.9rem;
+    }
+
+    #abecedario {
+        height: auto;
+        padding: 15px 10px;
+        flex-wrap: wrap;
+        gap: 2px;
+    }
+
+    #abecedario button {
+        font-size: 1.2rem;
+        padding: 5px;
+    }
+
+    #titulo_novedades {
+        margin-bottom: 20px;
+    }
+
+    #titulo_novedades h2 {
+        font-size: 1.5rem;
+    }
+
+    .libro {
+        min-height: 170px;
+    }
+
+    .libro img {
+        width: 110px;
+        height: 170px;
+    }
+
+    .info_libro {
+        padding: 10px;
+    }
+
+    .info_libro h3 {
+        font-size: 1.1rem;
+    }
+
+    .autor,
+    .descripcion {
+        font-size: 0.85rem;
+    }
+
+    .descripcion {
+        line-height: 1.2rem;
+    }
+
+    .descargar {
+        font-size: 0.8rem;
+    }
+
+    #btn_cargar_mas {
+        font-size: 0.9rem;
+    }
+}
+
+/* Mobile 2 */
+@media screen and (max-width: 375px) {
+    #menu {
+        gap: 12px;
+        font-size: 0.9rem;
+    }
+
+    #tabs {
+        height: 55px;
+    }
+
+    .tab {
+        font-size: 0.9rem;
+    }
+
+    #buscador {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    #input_busqueda {
+        width: auto;
+    }
+
+    #btn_input_buscar {
+        width: 100%;
+    }
+
+    #abecedario button {
+        font-size: 1rem;
+        padding: 4px;
+    }
+
+    #titulo_novedades h2 {
+        font-size: 1.3rem;
+    }
+
+    .libro {
+        min-height: 160px;
+    }
+
+    .libro img {
+        width: 95px;
+        height: 160px;
+    }
+
+    .info_libro h3 {
+        font-size: 1rem;
+    }
+
+    .autor {
+        margin-bottom: 8px;
+    }
+
+    .descripcion {
+        max-height: 58px;
     }
 }
