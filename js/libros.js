@@ -6,6 +6,7 @@ const botones_letras = document.querySelectorAll("#abecedario button");
 const botones_tabs = document.querySelectorAll(".tab");
 const lista_generos = document.getElementById("lista_generos");
 
+
 let url_actual = "https://gutendex.com/books/?sort=popular";
 let letra_actual = "";
 
@@ -134,7 +135,7 @@ function mostrar_libros(libros) {
 
         const imagen =
             element.formats["image/jpeg"] ||
-            "./img/logo.png";
+            "./img/portada-no-disponible.png";
 
         const descripcion =
             element.subjects.length > 0
@@ -153,12 +154,13 @@ function mostrar_libros(libros) {
         div_libro.classList.add("libro");
 
         div_libro.innerHTML = `
-            <img
-                src="${imagen}"
-                alt="${titulo}"
-            >
+    <img
+        src="${imagen}"
+        alt="${titulo}"
+        onerror="this.onerror=null; this.src='./img/portada-no-disponible.png';"
+    >
 
-            <div class="info_libro">
+    <div class="info_libro">
                 <h3>${titulo}</h3>
 
                 <p class="autor">
@@ -295,7 +297,7 @@ botones_tabs.forEach((tab) => {
         if (filtro_actual === "autores") {
             input_busqueda.placeholder = "Buscar libro o autor...";
 
-            genero_actual = "";
+            //genero_actual = "";
             letra_actual = "";
 
             url_actual = "https://gutendex.com/books/?sort=popular";
