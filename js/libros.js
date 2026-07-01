@@ -3,9 +3,33 @@ const btn_cargar_mas = document.getElementById("btn_cargar_mas");
 const input_busqueda = document.getElementById("input_busqueda");
 const btn_input_buscar = document.getElementById("btn_input_buscar");
 const botones_letras = document.querySelectorAll("#abecedario button");
+const botones_tabs = document.querySelectorAll(".tab");
+const lista_generos = document.getElementById("lista_generos");
 
 let url_actual = "https://gutendex.com/books/?sort=popular";
 let letra_actual = "";
+
+let filtro_actual = "autores";
+
+const generos = [
+    { nombre: "Aventura", consulta: "adventure" },
+    { nombre: "Biografía", consulta: "biography" },
+    { nombre: "Ciencia", consulta: "science" },
+    { nombre: "Ciencia ficción", consulta: "science fiction" },
+    { nombre: "Drama", consulta: "drama" },
+    { nombre: "Fantasía", consulta: "fantasy" },
+    { nombre: "Ficción", consulta: "fiction" },
+    { nombre: "Filosofía", consulta: "philosophy" },
+    { nombre: "Historia", consulta: "history" },
+    { nombre: "Humor", consulta: "humor" },
+    { nombre: "Infantil", consulta: "children" },
+    { nombre: "Misterio", consulta: "mystery" },
+    { nombre: "Poesía", consulta: "poetry" },
+    { nombre: "Religión", consulta: "religion" },
+    { nombre: "Romance", consulta: "romance" },
+    { nombre: "Terror", consulta: "horror" },
+    { nombre: "Viajes", consulta: "travel" }
+];
 
 function obtener_libros(url, limpiar = false, letra = "") {
     if (limpiar) {
@@ -145,9 +169,8 @@ function mostrar_libros(libros) {
                     Tema: ${descripcion}
                 </p>
 
-                ${
-                    link_descarga
-                        ? `
+                ${link_descarga
+                ? `
                             <a
                                 class="descargar"
                                 href="${link_descarga}"
@@ -157,12 +180,12 @@ function mostrar_libros(libros) {
                                 Leer o descargar
                             </a>
                         `
-                        : `
+                : `
                             <p>
                                 Descarga no disponible
                             </p>
                         `
-                }
+            }
             </div>
         `;
 
@@ -192,6 +215,56 @@ function buscar_libros() {
     obtener_libros(url_actual, true);
 }
 
+function mostrar_generos_por_letra(letra) {
+    lista_generos.innerHTML = "";
+    contenedor_libros.innerHTML = "";
+
+    const generos_filtrados = generos.filter((genero) => {
+        return genero.nombre
+            .toUpperCase()
+            .startsWith(letra.toUpperCase());
+    });
+
+    if (generos_filtrados.length === 0) {
+        lista_generos.innerHTML = `
+            <p>No hay géneros que empiecen con ${letra}.</p>
+        `;
+
+        return;
+    }
+
+    generos_filtrados.forEach((genero) => {
+        const boton_genero = document.createElement("button");
+
+        boton_genero.textContent = genero.nombre;
+        boton_genero.dataset.consulta = genero.consulta;
+        boton_genero.classList.add("boton_genero");
+
+        boton_genero.addEventListener("click", () => {
+            buscar_libros_por_genero(
+                genero.nombre,
+                genero.consulta
+            );
+        });
+
+        lista_generos.appendChild(boton_genero);
+    });
+}
+
+function buscar_libros_por_genero(nombre, consulta) {
+    letra_actual = "";
+    input_busqueda.value = nombre;
+
+    url_actual =
+        `https://gutendex.com/books/?topic=${encodeURIComponent(
+            consulta
+        )}`;
+
+    lista_generos.innerHTML = "";
+
+    obtener_libros(url_actual, true);
+}
+
 btn_input_buscar.addEventListener(
     "click",
     buscar_libros
@@ -206,24 +279,79 @@ input_busqueda.addEventListener(
     }
 );
 
+botones_tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+        botones_tabs.forEach((otro_tab) => {
+            otro_tab.classList.remove("activo");
+        });
+
+        tab.classList.add("activo");
+        filtro_actual = tab.dataset.filtro;
+
+        lista_generos.innerHTML = "";
+        input_busqueda.value = "";
+        letra_actual = "";
+
+        if (filtro_actual === "autores") {
+            input_busqueda.placeholder = "Buscar libro o autor...";
+
+            genero_actual = "";
+            letra_actual = "";
+
+            url_actual = "https://gutendex.com/books/?sort=popular";
+
+            lista_generos.innerHTML = "";
+            obtener_libros(url_actual, true);
+        }
+
+        if (filtro_actual === "generos") {
+            input_busqueda.placeholder = "Seleccioná una letra y un género";
+
+            contenedor_libros.innerHTML = "";
+            btn_cargar_mas.style.display = "none";
+        }
+
+        if (filtro_actual === "series") {
+            input_busqueda.placeholder = "Series todavía no disponible";
+        }
+    });
+});
+
+
+
 botones_letras.forEach((boton) => {
     boton.addEventListener("click", () => {
-        const letra =
-            boton.textContent.trim();
+        const letra = boton.textContent.trim();
 
-        letra_actual = letra;
         input_busqueda.value = letra;
 
-        url_actual =
-            `https://gutendex.com/books/?search=${encodeURIComponent(
-                letra
-            )}`;
+        if (filtro_actual === "autores") {
+            letra_actual = letra;
 
-        obtener_libros(
-            url_actual,
-            true,
-            letra_actual
-        );
+            url_actual =
+                `https://gutendex.com/books/?search=${encodeURIComponent(
+                    letra
+                )}`;
+
+            lista_generos.innerHTML = "";
+
+            obtener_libros(
+                url_actual,
+                true,
+                letra_actual
+            );
+        }
+
+        if (filtro_actual === "generos") {
+            letra_actual = "";
+            mostrar_generos_por_letra(letra);
+        }
+
+        if (filtro_actual === "series") {
+            lista_generos.innerHTML = `
+                <p>La sección Series todavía no está disponible.</p>
+            `;
+        }
     });
 });
 

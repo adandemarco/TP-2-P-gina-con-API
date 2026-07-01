@@ -217,6 +217,33 @@ li {
     cursor: pointer;
 }
 
+#lista_generos {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 0 20px 25px;
+}
+
+#lista_generos p {
+    color: #666;
+    font-size: 16px;
+}
+
+.boton_genero {
+    background-color: #3f86b9;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.boton_genero:hover {
+    background-color: #344253;
+}
+
 /* RESPONSIVE */
 
 /* Tablet horizontal */
